@@ -320,6 +320,23 @@ fn show_test_window<'a>(ui: &Ui<'a>, state: &mut State, opened: &mut bool) {
                             .build();
                     });
 
+                // Color buttons, demonstrate using PushID() to add unique identifier in the ID stack, and changing style.
+                for i in 0..7 {
+                    if i > 0 {
+                        ui.same_line(0.0);
+                    }
+
+                    ui.with_id(i, || {
+                        ui.with_color_var(ImGuiCol::Button, ImColor::hsv(i as f32 / 7.0, 0.6, 0.6, 1.0).value, || {
+                            ui.with_color_var(ImGuiCol::ButtonHovered, ImColor::hsv(i as f32 / 7.0, 0.7, 0.7, 1.0).value, || {
+                                ui.with_color_var(ImGuiCol::ButtonActive, ImColor::hsv(i as f32 / 7.0, 0.8, 0.8, 1.0).value, || {
+                                    ui.button(im_str!("Click"), (0.0, 0.0));
+                                });
+                            });
+                        });
+                    });
+                }
+
                 ui.separator();
                 ui.label_text(im_str!("label"), im_str!("Value"));
                 ui.combo(im_str!("combo"),
