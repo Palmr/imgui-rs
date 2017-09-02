@@ -42,6 +42,8 @@ struct State {
     selected_fish: Option<usize>,
     auto_resize_state: AutoResizeState,
     file_menu: FileMenuState,
+    button_clicked: bool,
+    checked: bool,
 }
 
 impl Default for State {
@@ -85,6 +87,8 @@ impl Default for State {
             selected_fish: None,
             auto_resize_state: Default::default(),
             file_menu: Default::default(),
+            button_clicked: false,
+            checked: false,
         }
     }
 }
@@ -319,6 +323,17 @@ fn show_test_window<'a>(ui: &Ui<'a>, state: &mut State, opened: &mut bool) {
                         ui.input_text(im_str!("UTF-8 input"), &mut state.buf)
                             .build();
                     });
+
+                if ui.button(im_str!("Button"), ImVec2::new(0.0, 0.0)) {
+                    println!("Clicked");
+                    state.button_clicked = !state.button_clicked;
+                }
+                if state.button_clicked {
+                    ui.same_line(0.0);
+                    ui.text(im_str!("Thanks for clicking me!"));
+                }
+
+                ui.checkbox(im_str!("checkbox"), &mut state.checked);
 
                 ui.separator();
                 ui.label_text(im_str!("label"), im_str!("Value"));
