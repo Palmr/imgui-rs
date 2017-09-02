@@ -34,7 +34,7 @@ pub use imgui_sys::{ImDrawIdx, ImDrawVert, ImGuiInputTextFlags, ImGuiInputTextFl
                     ImGuiWindowFlags_NoMove, ImGuiWindowFlags_NoResize,
                     ImGuiWindowFlags_NoSavedSettings, ImGuiWindowFlags_NoScrollWithMouse,
                     ImGuiWindowFlags_NoScrollbar, ImGuiWindowFlags_NoTitleBar,
-                    ImGuiWindowFlags_ShowBorders, ImVec2, ImVec4};
+                    ImGuiWindowFlags_ShowBorders, ImVec2, ImVec4, ImColor};
 pub use child_frame::ChildFrame;
 pub use input::{ColorEdit3, ColorEdit4, InputFloat, InputFloat2, InputFloat3, InputFloat4,
                 InputInt, InputInt2, InputInt3, InputInt4, InputText};

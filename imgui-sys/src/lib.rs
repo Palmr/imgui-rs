@@ -549,6 +549,36 @@ pub struct ImGuiSizeConstraintCallbackData {
 pub struct ImColor {
     pub value: ImVec4,
 }
+impl ImColor {
+    pub fn hsv(h: f32, s: f32, v: f32, a: f32) -> ImColor {
+        if s == 0.0 {
+            // gray
+            ImColor{
+                value: ImVec4::new(v, v, v, a)
+            }
+        }
+        else {
+            let h_deg: f32 = (h % 1.0) / (60.0/360.0);
+            let i: i32 = h_deg as i32;
+            let f: f32 = h_deg - i as f32;
+            let p: f32 = v * (1.0 - s);
+            let q: f32 = v * (1.0 - s * f);
+            let t: f32 = v * (1.0 - s * (1.0 - f));
+
+            let rgb_color = match i {
+                0 => ImVec4::new(v, t, p, a),
+                1 => ImVec4::new(q, v, p, a),
+                2 => ImVec4::new(p, v, t, a),
+                3 => ImVec4::new(p, q, v, a),
+                4 => ImVec4::new(t, p, v, a),
+                _ => ImVec4::new(v, p, q, a),
+            };
+            ImColor {
+                value: rgb_color.into()
+            }
+        }
+    }
+}
 
 /// Helper to manually clip large list of items
 #[repr(C)]
