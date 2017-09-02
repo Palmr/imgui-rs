@@ -44,6 +44,7 @@ struct State {
     file_menu: FileMenuState,
     button_clicked: bool,
     checked: bool,
+    radio_button: i32,
 }
 
 impl Default for State {
@@ -89,6 +90,7 @@ impl Default for State {
             file_menu: Default::default(),
             button_clicked: false,
             checked: false,
+            radio_button: 0,
         }
     }
 }
@@ -334,6 +336,12 @@ fn show_test_window<'a>(ui: &Ui<'a>, state: &mut State, opened: &mut bool) {
                 }
 
                 ui.checkbox(im_str!("checkbox"), &mut state.checked);
+
+                ui.radio_button(im_str!("radio a"), &mut state.radio_button, 0);
+                ui.same_line(0.0);
+                ui.radio_button(im_str!("radio b"), &mut state.radio_button, 1);
+                ui.same_line(0.0);
+                ui.radio_button(im_str!("radio c"), &mut state.radio_button, 2);
 
                 ui.separator();
                 ui.label_text(im_str!("label"), im_str!("Value"));
